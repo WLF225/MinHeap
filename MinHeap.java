@@ -7,6 +7,12 @@ public class MinHeap<T extends Comparable<T>> {
         heap = (T[]) new Comparable[size];
     }
 
+    public MinHeap(T[] array){
+        heap = array;
+        size = array.length;
+        heapify();
+    }
+
     public void insert(T data){
         //To make sure the heap still have space
         if (size < heap.length){
@@ -87,7 +93,16 @@ public class MinHeap<T extends Comparable<T>> {
         }
     }
 
-    private static <T> void swap(T[] array,int i,int j){
+    public void heapify(){
+        //The last element that has cheldren
+        int index = (size-2)/2;
+        //To sink all the elements that have children
+        for (int i = index;i >=0;i--){
+            sink(i);
+        }
+    }
+
+    private void swap(T[] array,int i,int j){
         T temp = array[i];
         array[i] = array[j];
         array[j] = temp;
@@ -99,3 +114,4 @@ public class MinHeap<T extends Comparable<T>> {
     }
 
 }
+
